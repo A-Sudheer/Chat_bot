@@ -76,14 +76,14 @@ app.post("/chat",async (req,res)=>{
         });
         
         const aiResponse = response.text;
+
         
         chatHistory.push({
-            role: "user",
+            role: "model",
             parts: [{text: aiResponse}]
         })
 
         res.send(`${aiResponse}`);
-
 
     }
     catch (error) {
