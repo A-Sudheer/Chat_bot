@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const mongoose = require("mongoose");
 const {GoogleGenAI} = require("@google/genai");
 require("dotenv").config();
 
@@ -11,6 +12,30 @@ const chatHistory = [];
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("Database Connected Successfully."))
+.catch((e) => console.error("An error occured while connecting to the database.",e.message));
+
+const ChatSchema = mongoose.Schema({
+    role: {
+        type: String,
+        required: true,
+        enum: ["user", "model"]
+    },
+    text: {type: String, required: true}
+});
+
+const ChatSessionSchema = mongoose.Schema({
+    sessionId: {
+        type: String,
+        required: true,
+        default: "default-guest-user"
+    },
+    history: [ChatSchema]
+},{timestamps: true});
+
+const ChatSession = mongoose.model("ChatSession", ChatSessionSchema);
 
 app.get("/",(req,res)=>{
     res.send(`
@@ -62,14 +87,24 @@ app.post("/chat",async (req,res)=>{
             return res.status(400).json({error : "Message is required"});
         }
 
-        chatHistory.push({
+        let session = await ChatSession.findOne({sessionId: "default-guest-user"});
+        if(!session){
+            session = new ChatSession({sessionId: "default-guest-user", history: []});
+        }
+
+        session.history.push({
             role: "user",
-            parts: [{text: userQuery}]
+            text: userQuery
         })
         
+        const geminiHistoryPayload = session.history.map(msg => ({
+            role: msg.role,
+            parts: [{text: msg.text}]
+        }));
+
         const response = await geminiBot.models.generateContent({
             model: "gemini-2.5-flash",
-            contents: chatHistory,
+            contents: geminiHistoryPayload,
             config: {
                 systemInstruction: "This AI is always at your service. Be brief and contextual."
             }
@@ -78,10 +113,12 @@ app.post("/chat",async (req,res)=>{
         const aiResponse = response.text;
 
         
-        chatHistory.push({
+        session.history.push({
             role: "model",
-            parts: [{text: aiResponse}]
+            text: aiResponse
         })
+
+        await session.save();
 
         res.send(`${aiResponse}`);
 
@@ -92,9 +129,17 @@ app.post("/chat",async (req,res)=>{
     }
 });
 
-app.post("/clear", (req,res) => {
-    chatHistory = [];
-    res.send("Chat history is cleared!");
+app.post("/clear", async(req,res) => {
+    try{
+        await ChatSession.findOneAndUpdate(
+            {sessionId: "default-guest-user"},
+            {$set: { history: []}}
+        );
+        res.send("Chat history is cleared!");
+    } catch(err){
+        console.error(err.message);
+        res.status(505).send("Failed to Clear the history from the database.");
+    }
 })
 
 app.listen(3000,()=> console.log("Server is now running at http://localhost:3000"));
