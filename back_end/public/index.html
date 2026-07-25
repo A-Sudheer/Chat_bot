@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>This is Home Page</h1>
+    <br>
+    <p>Enter your PROMPT here: </p>
+    <br>
+    <input type="text" id = "queryInput" name = "message">
+    <button onclick="handleSubmit()"> ⬆️ </button>
+    <button onclick="clearHistory()"> Clear History </button>
+    <div id = "display"> </div>
+    <script>
+        const out = document.getElementById("display");
+
+        const handleSubmit = async() => {
+            out.innerHTML = "On your command. You can ask me anything. Literally ANYTHING.";
+
+            const query = document.getElementById("queryInput").value;
+
+            try{
+                const res = await fetch("/chat",{
+                    method: "POST",
+                    headers: {"Content-Type": 'application/json'},
+                    body: JSON.stringify({ message: query })
+                })
+                out.innerHTML = await res.text();
+            } catch(err){
+                out.innerHTML = "Sorry! An error occured while Fetching..";
+            }
+        }
+
+        const clearHistory = async() => {
+            out.innerHTML = "On your command..";
+            const res = await fetch("/clear",{
+                method: "POST"
+            })
+            
+            out.innerHTML = await res.text();
+        }
+    </script>
+</body>
+</html>

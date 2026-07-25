@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {Send} from "lucide-react"
 
 const App = () => {
   const [userQuery, setUserQuery] = useState("");
@@ -106,7 +107,8 @@ const App = () => {
           }} />
         <button
           type="submit"
-          disabled = {loading}
+          disabled={loading}
+          onClick={handleSubmit}
           style={{
             marginLeft: "5px",
             padding: "10px 20px",
@@ -114,7 +116,8 @@ const App = () => {
             backgroundColor: "#8cef23",
             borderRadius: "10px",
             cursor: "pointer"
-          }}>⬆️</button>
+          }}
+        ><Send size = {18} /></button>
       </form>
       <br />
       <button onClick={clearHistory} style={{ background: "none", border: "none", color: "#dc3545", cursor: "pointer", textDecoration: "underline"}}>Clear History</button>
