@@ -15,7 +15,7 @@ const sendMessage = async (req, res) => {
 
         const response = await geminiBot.models.generateContent({
             model: "gemini-2.5-flash",
-            content: geminiHistoryPayload,
+            contents: geminiHistoryPayload,
             config: {systemInstruction: "This AI is always at your service. Be brief and contextual."}
         });
 
