@@ -16,7 +16,7 @@ const useChat = () => {
                 body: JSON.stringify({message: queryText})
             });
 
-            const reply = await res.text();
+            const reply = await res.json().reply;
             setMessages([...newMessages, {role: "model", text: reply }]);
 
         } catch (error) {

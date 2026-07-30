@@ -6,7 +6,19 @@ const ChatSchema = mongoose.Schema({
 })
 
 const ChatSessionSchema = mongoose.Schema({
-    sessionId: {type: String, required: true, default: "default-guest-user"},
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: false,
+        index: true
+    },
+    sessionId: {
+        type: String,
+        required: true,
+        default: () => new mongoose.Types.ObjectId().toString(),
+        unique: true,
+        index: true
+    },
     history: [ChatSchema]
 }, {timestamps: true});
 

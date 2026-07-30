@@ -36,9 +36,8 @@
         const clearHistory = async() => {
             out.innerHTML = "On your command..";
             const res = await fetch("/clear",{
-                method: "POST"
-            })
-            
+                method: "DELETE"
+            });
             out.innerHTML = await res.text();
         }
     </script>
