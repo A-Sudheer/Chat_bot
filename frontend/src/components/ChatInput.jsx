@@ -4,9 +4,9 @@ import {useRef} from "react";
 const ChatInput = ({sendMessage, loading}) => {
     const inputRef = useRef(null);
     const handleSubmit = (e) => {
-        e.preventDefault();
-        sendMessage(inputRef.current.value);
-        inputRef.current.value = "";
+      e.preventDefault();
+      sendMessage(inputRef.current.value);
+      inputRef.current.value = "";
     }
     return (
         <form onSubmit={handleSubmit}>

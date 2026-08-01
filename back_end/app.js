@@ -11,6 +11,6 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join("./", "public")));
-app.use("/", chatRoutes);
+app.use("/api", chatRoutes);
 
 export default app;
