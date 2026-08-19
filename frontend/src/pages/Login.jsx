@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import "../styling/Login.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -39,21 +40,24 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <h2>Login</h2>
-            { error && <p style={{ color: "red" }}> {error} </p>}
-            <label htmlFor="Email">Email:</label>
-            <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
-            <br />
-            <label htmlFor="Password">Password</label>
-            <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
-            <br />
-            <button type="submit" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
-            <br />
-            <Link to="/register">Register</Link>
-            <br />
-            <Link to="/chat">Skip Login?</Link>
-        </form>
+        <div>
+            <h2 className="heading">Login</h2>
+            <form className="container" onSubmit={handleSubmit}>
+                { error && <p style={{ color: "red" }}> {error} </p>}
+                <br />
+                <label htmlFor="Email">Email:</label> <br />
+                <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
+                <br />
+                <label htmlFor="Password">Password</label> <br />
+                <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
+                <br />
+                <button type="submit" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
+                <br />
+                <Link to="/register" className="link">Register</Link>
+                <br />
+                <Link to="/chat" className="link">Skip Login?</Link>
+            </form>
+        </div>
     );
 }
 

@@ -1,0 +1,27 @@
+.heading{
+    margin: 10px 0px;
+    background-color: blue;
+    color: red;
+    text-align: center;
+    font-size: 10ex;
+}
+.container{
+    text-align: center;
+    line-height: 30px;;
+    border-color: aqua;
+    border-width: 10px;
+    border-radius: 10%;
+    width: auto;
+    height: auto;
+    background-color: rgb(44, 42, 192);
+    color: greenyellow;
+}
+input {
+    width: 150px;
+    height: 25px;
+    gap: 10px;
+}
+.link{
+    text-decoration: none;
+    color: greenyellow;
+}
