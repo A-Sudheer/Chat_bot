@@ -23,6 +23,7 @@ const register = async (req,res) => {
             user: { id: user._id, username: user.username, email: user.email }
         });
     } catch (e) {
+        console.error(e);
         res.status(500).json({ message: "Registration failed", error: e.message })
     }
 }
@@ -51,6 +52,7 @@ const login = async (req, res) => {
             user: {id: user._id, username: user.username, email: user.email }
         });
     } catch (e) {
+        console.error(e);
         res.status(500).json({ message: "Problem occurred while connecting to database or generating token", error: e.message});
     }
 }

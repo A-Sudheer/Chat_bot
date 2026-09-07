@@ -17,7 +17,7 @@ const ChatInput = ({sendMessage, loading}) => {
           disabled = {loading}
           style={{
             fontSize: "20px",
-            width: "75%",
+            width: "82.5%",
             height: "50px",
             borderRadius: "30px"
           }} />

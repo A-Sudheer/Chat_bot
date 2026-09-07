@@ -49,7 +49,7 @@ const getSession = async (req, res) => {
 const getUserSessions = async (req, res) => {
     try {
         const userId = req.user.id;
-        const allSessions = await User.find({ userId })
+        const sessions = await ChatSession.find({ userId })
             .sort({ updatedAt: -1 })
             .select("sessionId history.0 createdAt updatedAt");
         
@@ -68,7 +68,7 @@ const clearHistory = async (req, res) => {
             { $set: {history: [] } }
         );
 
-        if(result.matchedCount === 0) return res.status(404).json({ message: "Session not found" });
+        if(!result) return res.status(404).json({ message: "Session not found" });
         res.send("Chat history cleared successfully.");
     } catch (err) {
         res.status(505).json({ message: "Failed to clear the history from the database.", error: err.message});

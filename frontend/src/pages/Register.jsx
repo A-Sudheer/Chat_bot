@@ -36,28 +36,31 @@ const Register = () => {
         } catch (err) {
             setError("Failed to Sign In. Please try again.");
             setSubmitting(false);
+            console.error(err);
         }
     };
 
     return (
-        <form onSubmit = {handleSubmit}>
-            <h2>Register</h2>
-            { error && <p style={{ color: "red" }}> {error} </p>}
-            <label htmlFor="Username">Username</label>
-            <input type="text" value = {username} onChange = {(e) => setUsername(e.target.value)} required />
-            <br />
-            <label htmlFor="Email">Email:</label>
-            <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
-            <br />
-            <label htmlFor="Password">Password</label>
-            <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
-            <br />
-            <button type="submit" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
-            <br />
-            <Link to="/login">Login</Link>
-            <br />
-            <Link to="/chat">Skip Login?</Link>
-        </form>
+        <div className="parentClass">
+            <form className="container" onSubmit = {handleSubmit}>
+                <label className = "header"><strong>REGISTER</strong></label>
+                { error && <p style={{ color: "red" }}><strong>Error:</strong> &nbsp; {error} </p>}
+                <label htmlFor="Username">Username</label> <br />
+                <input type="text" value = {username} onChange = {(e) => setUsername(e.target.value)} required />
+                <br />
+                <label htmlFor="Email">Email:</label> <br />
+                <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
+                <br />
+                <label htmlFor="Password">Password</label> <br />
+                <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
+                <br />
+                <button className="clickMe" type="submit" disabled = {submitting}>{ submitting? "Registering in...": "Register"}</button>
+                <br />
+                <Link className="link" to="/login">Login</Link>
+                <br />
+                <Link className="link" to="/chat">Skip Login?</Link>
+            </form>
+        </div>
     );
 };
 

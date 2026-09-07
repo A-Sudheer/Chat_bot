@@ -13,12 +13,12 @@ const ChatWindow = ({ sessionId }) => {
                 padding: "15px",
                 height: "400px",
                 overflowY: "auto",
-                backgroundColor: "#4259bc",
+                backgroundColor: "#89c2ff",
                 marginBottom: "20px"
             }}>
                 {messages.length===0? (
                     <p style={{
-                        color: "#888",
+                        color: "#322232",
                         textAlign: "center",
                         marginTop: "170px"
                     }}>Ask me anything! Your conversation history will display here.</p>

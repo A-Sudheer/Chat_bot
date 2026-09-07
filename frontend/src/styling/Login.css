@@ -1,27 +1,50 @@
+body{
+    background-color: #3b1b3bd3;
+    color: #dfeefe;
+}
 .heading{
-    margin: 10px 0px;
-    background-color: blue;
-    color: red;
+    margin: 20px 10px;
     text-align: center;
     font-size: 10ex;
 }
+.header{
+    font-size: 5ex;
+    color: #2c1b2cd0;
+    margin-bottom: 20px;
+}
+.parentClass{
+    width: 95vw;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    line-height: 30px;;
-    border-color: aqua;
+    line-height: 15px;
     border-width: 10px;
     border-radius: 10%;
-    width: auto;
+    width: 400px;
     height: auto;
-    background-color: rgb(44, 42, 192);
-    color: greenyellow;
+    padding: 20px;
+    color: #322232;
+    background-color: #dfeefe;
 }
 input {
     width: 150px;
     height: 25px;
-    gap: 10px;
+    border-radius: 5px;
+}
+.clickMe{
+    background-color: #322232;
+    color: whitesmoke;
+    padding: 10px 20px;
+    border-radius: 10px;
 }
 .link{
     text-decoration: none;
-    color: greenyellow;
 }

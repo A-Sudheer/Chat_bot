@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 const optionalAuth = ( req, res, next ) => {
     const authHeader = req.headers.authorization;
     if(authHeader && authHeader.startsWith("Bearer ")) {
@@ -6,10 +8,11 @@ const optionalAuth = ( req, res, next ) => {
             const decoded = jwt.verify( token, process.env.JWT_SECRET );
             req.user = { id: decoded.id };
         } catch (err) {
-            
+            console.error(err);
+            res.status(500).json({ message: 'Registration failed', error: err.message });
         }
     }
     next();
-}
+};
 
 export default optionalAuth;

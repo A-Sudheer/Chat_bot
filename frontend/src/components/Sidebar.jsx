@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext.jsx";
 
 const Sidebar = () => {
     const [ sessions, setSessions ] = useState([]);
+    const [ view, setView ] = useState(false);
     const { token } = useAuth();
     const navigate = useNavigate();
 
@@ -13,6 +14,7 @@ const Sidebar = () => {
                 const res = await fetch("/api/sessions",{
                     headers: { Authorization: `Bearer ${token}` }
                 });
+                if (!res.ok) throw new Error();
                 const data = await res.json();
                 setSessions(data);
             } catch (err) {
@@ -25,7 +27,7 @@ const Sidebar = () => {
 
     return (
         <div style = {{ width: "200px", borderRight: "1px solid #ccc" }}>
-            <button onClick = {() => navigate("/chat")}> New Chat</button>
+            <button className="clickMe" onClick = {() => navigate("/chat")}> New Chat</button>
             <h3>Your Chats</h3>
             { sessions.map((s) => (
                 <div
@@ -33,7 +35,7 @@ const Sidebar = () => {
                     onClick = {()=> navigate(`/chat/${s.sessionId}`)}
                     style = {{ cursor: 'pointer', padding: "8px" }}
                 >
-                    {s.history?.[0]?.text?.slice(0,30) || "New Chat" } 
+                    {s.history?.[0]?.text?.slice(0,30) || "New Chat" }
                 </div>
             ))}
         </div>

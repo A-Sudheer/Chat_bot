@@ -21,7 +21,7 @@ const Login = () => {
             const res = await fetch("/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, pwd, guestSessionId })
+                body: JSON.stringify({ email, password: pwd, guestSessionId })
             });
 
             const data = await res.json();
@@ -41,22 +41,26 @@ const Login = () => {
 
     return (
         <div>
-            <h2 className="heading">Login</h2>
-            <form className="container" onSubmit={handleSubmit}>
-                { error && <p style={{ color: "red" }}> {error} </p>}
-                <br />
-                <label htmlFor="Email">Email:</label> <br />
-                <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
-                <br />
-                <label htmlFor="Password">Password</label> <br />
-                <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
-                <br />
-                <button type="submit" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
-                <br />
-                <Link to="/register" className="link">Register</Link>
-                <br />
-                <Link to="/chat" className="link">Skip Login?</Link>
-            </form>
+            <h2 className="heading">Welcome to the Login Page</h2>
+            <br />
+            <div className="parentClass">
+                <form className="container" onSubmit={handleSubmit}>
+                    <label className="header"><strong>LOG IN</strong></label>
+                    { error && <p style={{ color: "red" }}><strong>Error:</strong> &nbsp; {error} </p>}
+                    <br />
+                    <label htmlFor="Email">Email:</label> <br />
+                    <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
+                    <br />
+                    <label htmlFor="Password">Password</label> <br />
+                    <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
+                    <br />
+                    <button type="submit" className="clickMe" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
+                    <br />
+                    <Link to="/register" className="link">Register</Link>
+                    <br />
+                    <Link to="/chat" className="link">Skip Login?</Link>
+                </form>
+            </div>
         </div>
     );
 }
