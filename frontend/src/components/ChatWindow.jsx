@@ -1,33 +1,23 @@
 import MessageBubble from "./MessageBubble";
 import useChat from "../hooks/useChat.js";
 import ChatInput from "./ChatInput.jsx";
+import "../styling/ChatWindow.css";
 
 const ChatWindow = ({ sessionId }) => {
-
     const { messages, sendMessage, loading } = useChat(sessionId);
+    const isEmpty = messages.length === 0;
     return (
-        <div>
-            <div style={{
-                border: "1px solid #222",
-                borderRadius: "8px",
-                padding: "15px",
-                height: "400px",
-                overflowY: "auto",
-                backgroundColor: "#89c2ff",
-                marginBottom: "20px"
-            }}>
-                {messages.length===0? (
-                    <p style={{
-                        color: "#322232",
-                        textAlign: "center",
-                        marginTop: "170px"
-                    }}>Ask me anything! Your conversation history will display here.</p>
+        <div className="chat-window">
+            <div className={`chat-messages ${isEmpty ? "is-empty" : ""}`}>
+                {isEmpty ? (
+                    <p className="chat-empty">
+                        Ask me anything! Your conversation history will display here.
+                    </p>
                 ) : (
-                    messages.map((m,idx) => <MessageBubble key ={idx} message = {m} />)
-                )
-                }
+                    messages.map((m, idx) => <MessageBubble key={idx} message={m} />)
+                )}
             </div>
-            <ChatInput sendMessage = {sendMessage} loading = {loading} />
+            <ChatInput sendMessage={sendMessage} loading={loading} />
         </div>
     );
 };

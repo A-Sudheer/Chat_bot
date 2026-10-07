@@ -1,0 +1,43 @@
+/* ===== Theme variables: change sizes/colors here ===== */
+:root {
+  --layout-bg: #f7f7f8;
+  --layout-gap: 12px;
+  --toggle-bg: #ffffff;
+  --toggle-border: #cccccc;
+  --toggle-hover: #f0f0f0;
+  --layout-radius: 6px;
+}
+
+/* ===== Page layout ===== */
+.chat-layout {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--layout-gap);
+  min-height: 100vh;
+  background: var(--layout-bg);
+}
+
+/* ===== Show/Hide Chats button ===== */
+.toggle-chats-btn {
+  align-self: flex-start;
+  margin: var(--layout-gap);
+  padding: 8px 12px;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: var(--layout-radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toggle-chats-btn:hover {
+  background: var(--toggle-hover);
+}
+
+/* ===== Chat area (wrap ChatWindow so it can grow) ===== */
+.chat-main {
+  flex: 1;
+  min-width: 0;
+  max-width: 900px;
+}

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
+import "../styling/Sidebar.css";
 
 const Sidebar = () => {
     const [ sessions, setSessions ] = useState([]);
-    const [ view, setView ] = useState(false);
     const { token } = useAuth();
     const navigate = useNavigate();
+    const { sessionId } = useParams();
 
     useEffect(() => {
         const fetchSessions = async () => {
@@ -26,9 +27,9 @@ const Sidebar = () => {
     },[token]);
 
     return (
-        <div style = {{ width: "200px", borderRight: "1px solid #ccc" }}>
+        <div className="sidebar">
             <button className="clickMe" onClick = {() => navigate("/chat")}> New Chat</button>
-            <h3>Your Chats</h3>
+            <h3 className="sidebar-title">Your Chats</h3>
             { sessions.map((s) => (
                 <div
                     key = {s.sessionId}

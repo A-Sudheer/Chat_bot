@@ -1,0 +1,47 @@
+:root {
+  --chat-window-height: 100vh;   /* total height of the whole component */
+  --chat-messages-ratio: 80fr;   /* messages area */
+  --chat-input-ratio: 12fr;      /* input area */
+  --chat-gap: 3vh;               /* space between messages and input */
+  --chat-edge: 2.5vh;            /* space at top and bottom */
+  --chat-bg: #89c2ff;
+  --chat-border: #222222;
+  --chat-padding: 15px;
+  --chat-radius: 12px;
+  --chat-empty-color: #322232;
+}
+
+.chat-window {
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 70%;
+  height: var(--chat-window-height);
+  padding: var(--chat-edge) 0;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: var(--chat-messages-ratio) var(--chat-input-ratio);
+  row-gap: var(--chat-gap);
+}
+
+.chat-messages {
+  min-height: 0;               /* lets the box scroll instead of growing */
+  padding: var(--chat-padding);
+  background-color: var(--chat-bg);
+  border: 1px solid var(--chat-border);
+  border-radius: var(--chat-radius);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.chat-messages.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-empty {
+  margin: 0;
+  text-align: center;
+  color: var(--chat-empty-color);
+}

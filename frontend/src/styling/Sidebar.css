@@ -1,0 +1,75 @@
+/* ===== Theme variables: change colors/sizes here ===== */
+:root {
+  --sidebar-width: 220px;
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #cccccc;
+  --sidebar-text: #222222;
+  --sidebar-muted: #777777;
+  --sidebar-hover: #f0f0f0;
+  --sidebar-active: #e6efff;
+  --accent: #2563eb;
+  --accent-hover: #1d4ed8;
+  --radius: 6px;
+}
+
+/* ===== Container ===== */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  color: var(--sidebar-text);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* ===== New Chat button ===== */
+.clickMe {
+  width: 100%;
+  padding: 10px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.clickMe:hover {
+  background: var(--accent-hover);
+}
+
+/* ===== Heading ===== */
+.sidebar-title {
+  margin: 16px 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--sidebar-muted);
+}
+
+/* ===== Chat list items ===== */
+.session-item {
+  padding: 8px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.15s;
+}
+
+.session-item:hover {
+  background: var(--sidebar-hover);
+}
+
+.session-item.active {
+  background: var(--sidebar-active);
+  font-weight: 500;
+}

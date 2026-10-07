@@ -40,27 +40,49 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <h2 className="heading">Welcome to the Login Page</h2>
-            <br />
-            <div className="parentClass">
-                <form className="container" onSubmit={handleSubmit}>
-                    <label className="header"><strong>LOG IN</strong></label>
-                    { error && <p style={{ color: "red" }}><strong>Error:</strong> &nbsp; {error} </p>}
-                    <br />
-                    <label htmlFor="Email">Email:</label> <br />
-                    <input type="email" name="email" placeholder="example@gmail.com" value={email} onChange={(e)=> setEmail(e.target.value)} required />
-                    <br />
-                    <label htmlFor="Password">Password</label> <br />
-                    <input type="password" name="password" placeholder="Pass@123" value={pwd} onChange={(e) => setPwd(e.target.value)} required />
-                    <br />
-                    <button type="submit" className="clickMe" disabled = {submitting}>{ submitting? "Logging in...": "Login"}</button>
-                    <br />
-                    <Link to="/register" className="link">Register</Link>
-                    <br />
-                    <Link to="/chat" className="link">Skip Login?</Link>
-                </form>
-            </div>
+        <div className="login-page">
+            <h2 className="login-heading">Welcome to the Login Page</h2>
+            <form className="login-card" onSubmit={handleSubmit}>
+                <span className="login-title">LOG IN</span>
+                {error && (
+                    <p className="login-error">
+                        <strong>Error:</strong> {error}
+                    </p>
+                )}
+                <div className="login-field">
+                    <label className="login-label" htmlFor="email">Email</label>
+                    <input
+                        className="login-input"
+                        id="email"
+                        type="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="login-field">
+                    <label className="login-label" htmlFor="password">Password</label>
+                    <input
+                        className="login-input"
+                        id="password"
+                        type="password"
+                        name="password"
+                        placeholder="Pass@123"
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        required
+                    />
+                </div>
+                <button type="submit" className="login-btn" disabled={submitting}>
+                    {submitting ? "Logging in..." : "Login"}
+                </button>
+                <div className="login-links">
+                    <Link to="/register" className="login-link">Register</Link>
+                    <Link to="/chat" className="login-link">Skip Login?</Link>
+                </div>
+            </form>
         </div>
     );
 }
